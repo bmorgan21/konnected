@@ -35,17 +35,34 @@ export const fillSensors = (sensors, num) => {
     sensors = sensors || [];
     let index = {};
 
-    [...Array(num)].forEach((i, idx) => {
-        index[idx + 1] = '?';
+    const pinMapping = {
+        1: 1,
+        2: 2,
+        5: 3,
+        6: 4,
+        7: 5,
+        9: 6
+    };
+
+    Object.keys(pinMapping).forEach((p, idx) => {
+        index[p] = '?';
     });
 
     sensors.forEach((item) => {
         index[item.pin] = item.state;
     });
 
-    return Object.keys(index).map((k) => {
+    let results = Object.keys(index).map((k) => {
         return { pin: k, state: index[k] };
     });
+
+    results.sort((d) => { return d.pin });
+
+    results.forEach((d, idx) => {
+        d['name'] = pinMapping[d.pin];
+    });
+
+    return results;
 }
 
 export const HostPort = ({ host, port }) => {

@@ -16,7 +16,7 @@ function Board({ board }) {
             <td>{utils.formatHeap(board.heap)}</td>
             <td>
                 {utils.fillSensors(board.sensors, 6).map((pin, i) => (
-                    <Pin pin={pin} key={i} />
+                    <Pin pin={pin} name={i + 1} key={i} />
                 ))}
             </td>
         </tr>

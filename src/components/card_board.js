@@ -8,8 +8,16 @@ function CardBoard({ board }) {
     return (
         <div className="card border-primary">
             <h5 className="card-header text-white bg-primary">
-                <small className="float-right font-weight-normal mt-1">({utils.formatMilliseconds(board.t)})</small>
+                <div className="float-right">
+                    {board.t && (<small className="float-right font-weight-normal mt-1">({utils.formatMilliseconds(board.t)})</small>)}
+                    {!board.t && (
+                        <div className="spinner-grow spinner-grow-sm text-light mr-3" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    )}
+                </div>
                 {board.name}
+
             </h5>
             <div className="card-body">
                 <dl className="row mb-0">
@@ -31,7 +39,7 @@ function CardBoard({ board }) {
             </div>
             <div className="card-footer">
                 {utils.fillSensors(board.sensors, 6).map((pin, i) => (
-                    <Pin pin={pin} key={i} />
+                    <Pin pin={pin} name={i + 1} key={i} />
                 ))}
             </div>
         </div>

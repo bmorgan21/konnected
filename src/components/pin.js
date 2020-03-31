@@ -13,9 +13,9 @@ const className = (value) => {
 };
 
 
-function Pin({ pin }) {
+function Pin({ pin, name }) {
     return (
-        <span className={className(pin.state)}>{pin.pin}</span>
+        <span className={className(pin.state)}>{pin.name}</span>
     );
 }
 
